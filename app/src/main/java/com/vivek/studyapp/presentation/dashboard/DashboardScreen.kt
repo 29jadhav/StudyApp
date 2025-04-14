@@ -122,7 +122,7 @@ private fun DashboardScreen(
         onGoalHoursChange = {
             if (it!!.toFloatOrNull() != null) {
                 //   val goalHours = it!!.toFloat()
-                onEvent(DashboardEvent.OnGoalStudyHourChange(it!!))
+                onEvent(DashboardEvent.OnGoalStudyHourChange(it))
             }
         },
         onColorChange = { onEvent(DashboardEvent.OnSubjectCardColorChange(it)) },
@@ -138,7 +138,7 @@ private fun DashboardScreen(
         mutableStateOf(false)
     }
 
-    var snackbarHostState = remember {
+    val snackbarHostState = remember {
         SnackbarHostState()
     }
 
