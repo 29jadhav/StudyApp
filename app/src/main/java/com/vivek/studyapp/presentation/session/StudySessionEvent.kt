@@ -8,7 +8,7 @@ sealed class StudySessionEvent {
     data class OnRelatedSubjectChange(val subject: Subject) : StudySessionEvent()
     data class SaveSession(val duration: Long) : StudySessionEvent()
     data class OnDeleteSessionBtnClick(val session: StudySession) : StudySessionEvent()
-    data object NotifyToUpdateSubject : StudySessionEvent()
+    data class NotifyToUpdateSubject(val message: String) : StudySessionEvent()
     data class UpdateSubjectIdAndRelatedSubject(val subjectId: Long?, val relatedSubject: String?) :
         StudySessionEvent()
 

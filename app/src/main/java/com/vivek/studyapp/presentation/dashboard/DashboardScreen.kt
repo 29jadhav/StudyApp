@@ -293,7 +293,7 @@ fun SubjectCardSection(
 
             }
         }
-        if (subjects.isNullOrEmpty()) {
+        if (subjects.isEmpty()) {
             Image(
                 modifier = Modifier
                     .size(120.dp)

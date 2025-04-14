@@ -48,6 +48,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ramcosta.composedestinations.annotation.DeepLink
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.vivek.studyapp.R
 import com.vivek.studyapp.presentation.component.DeleteDialog
 import com.vivek.studyapp.presentation.component.SubjectListBottomSheet
 import com.vivek.studyapp.presentation.component.studySessionList
@@ -125,7 +126,7 @@ fun StudySessionScreen(
         onSubjectSelected = {
             event(StudySessionEvent.OnRelatedSubjectChange(it))
             timerService.subjectId.value = it.subjectId
-            Log.d("TAG","created timerService.subjectId="+timerService.subjectId.value)
+            Log.d("TAG", "created timerService.subjectId=" + timerService.subjectId.value)
             scope.launch {
                 sheetState.hide()
                 if (!sheetState.isVisible) isBottomSheetOpen = false
@@ -144,7 +145,7 @@ fun StudySessionScreen(
     }
 
     LaunchedEffect(key1 = state.subjectList) {
-        Log.d("TAG","timerService.subjectId="+timerService.subjectId.value)
+        Log.d("TAG", "timerService.subjectId=" + timerService.subjectId.value)
         val subjectId = timerService.subjectId.value ?: return@LaunchedEffect
         event(
             StudySessionEvent.UpdateSubjectIdAndRelatedSubject(
@@ -215,7 +216,7 @@ fun StudySessionScreen(
                         )
                     },
                     onStartBtnClick = {
-                        if (!state.relatedToSubject.isNullOrEmpty()) {
+                        if (state.relatedToSubject.isNotEmpty()) {
                             ServiceHelper.triggerForegroundService(
                                 action = if (currentTimerState == TimerState.STARTED) {
                                     ACTION_SERVICE_STOP
@@ -223,7 +224,7 @@ fun StudySessionScreen(
                                 context = context
                             )
                         } else {
-                            event(StudySessionEvent.NotifyToUpdateSubject)
+                            event(StudySessionEvent.NotifyToUpdateSubject(context.getString(R.string.choose_related_to_subject)))
                         }
                     },
                     s = seconds,
@@ -232,8 +233,8 @@ fun StudySessionScreen(
             }
 
             studySessionList(
-                sectionTitle = "Study Sessions History",
-                emptySessionTitle = "You don't have any recent session.\n Start a study session to begin recording your progress",
+                sectionTitle = context.getString(R.string.study_sessions_history),
+                emptySessionTitle = context.getString(R.string.start_a_study_session_msg),
                 studySessionList = state.sessionList,
                 onDeleteSessionClick = {
                     event(StudySessionEvent.OnDeleteSessionBtnClick(it))

@@ -4,6 +4,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 fun Long?.fromMilliToDateString(): String {
     var date: LocalDate =
@@ -19,7 +20,7 @@ fun Int.pad(): String {
 
 fun Long.fromMilliToHour(): Double {
     return this.let { milli ->
-        String.format("%.2f", milli.toDouble() / (60 * 60 * 1000))
+        String.format(Locale.getDefault(), "%.2f", milli.toDouble() / (60 * 60 * 1000))
             .toDouble() //1sec = 1000 milli, 1min = 60sec, 1hr = 60min
     }
 }

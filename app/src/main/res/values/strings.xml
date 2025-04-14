@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Study App</string>
+    <string name="choose_related_to_subject">Related to subject can not be empty. Please choose related to subject.</string>
+    <string name="study_sessions_history">Study Sessions History</string>
+    <string name="start_a_study_session_msg">You don\'t have any recent session.\n Start a study session to begin recording your progress</string>
 </resources>
