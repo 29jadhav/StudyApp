@@ -2,7 +2,6 @@ package com.vivek.studyapp.presentation.session
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vivek.studyapp.R
 import com.vivek.studyapp.domain.model.StudySession
 import com.vivek.studyapp.domain.repository.StudySessionRepository
 import com.vivek.studyapp.domain.repository.SubjectRepository
@@ -95,7 +94,7 @@ class StudySessionViewModel @Inject constructor(
     private fun saveSession(duration: Long) {
         viewModelScope.launch {
             try {
-                if (_state.value.relatedToSubject.isNullOrEmpty()) {
+                if (_state.value.relatedToSubject.isEmpty()) {
                     _snackbarEventFlow.emit((SnackbarEvent.ShowSnackbar(message = "Related to subject can not be empty. Please choose related to subject.")))
                     return@launch
                 }

@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 fun Long?.fromMilliToDateString(): String {
-    var date: LocalDate =
+    val date: LocalDate =
         this?.let { Instant.ofEpochMilli(it).atZone(ZoneId.systemDefault()).toLocalDate() }
             ?: LocalDate.now()
     return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
